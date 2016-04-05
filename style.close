@@ -1,0 +1,12 @@
+body {
+  margin: 0;
+  background-color: somewhat('blueish');
+  color: somewhat('orangeish');
+  font-family: Helvetica, sans-serif;
+}
+
+.container {
+  width: somewhat('largish');
+  height: somewhat('tallish');
+  background-color: somewhat('blueish');
+}

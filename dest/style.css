@@ -1,0 +1,63 @@
+body {
+  font-family: Avenir, sans-serif;
+  background-color: #001f3f;
+  color: #ffd717;
+  margin: 0; }
+
+select {
+  appearance: none;
+  background: transparent;
+  border: none; }
+
+h2 {
+  font-size: 2.5em; }
+
+#nav {
+  margin-top: 4em; }
+
+#banner {
+  background-color: #ffd717;
+  color: #083358;
+  border-radius: 10px;
+  margin-top: 3em; }
+
+.showcase {
+  background-image: url("../assets/maplestory_bg.png");
+  background-repeat: no-repeat;
+  width: 100%;
+  border-radius: 10px; }
+
+#slime {
+  position: absolute;
+  bottom: 50px;
+  left: 200px; }
+
+.gif-wrap {
+  position: relative;
+  width: 300px;
+  height: 500px; }
+
+.signup-form {
+  width: 100%; }
+  .signup-form h2 {
+    padding: .5em;
+    line-height: 1.25; }
+  .signup-form form {
+    padding: 1em; }
+  .signup-form input[type="text"] {
+    border-bottom-color: inherit; }
+  .signup-form select {
+    border: 1px solid #083358; }
+  .signup-form input[type="submit"] {
+    display: flex;
+    justify-content: center;
+    padding: 10px 25px 10px;
+    font-size: 1.2em;
+    border: none;
+    background-color: #0da574;
+    color: white;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px; }
+
+/*# sourceMappingURL=style.css.map */
