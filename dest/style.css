@@ -2,7 +2,8 @@ body {
   font-family: "Open Sans", sans-serif;
   background-color: #001f3f;
   color: #ffd717;
-  margin: 0; }
+  margin: 0;
+  box-sizing: border-box; }
 
 select {
   appearance: none;
@@ -15,40 +16,59 @@ h2 {
 #nav {
   margin-top: 4em; }
 
-#banner {
+#game {
   background-color: #ffd717;
   color: #083358;
   border-radius: 10px;
-  margin-top: 3em; }
+  margin-top: 3em;
+  max-height: 33em; }
 
-.showcase {
+.game-play {
   background-image: url("../assets/maplestory_bg.png");
   background-repeat: no-repeat;
   width: 100%;
-  border-radius: 10px; }
+  border-radius: 10px;
+  max-height: 33em; }
 
-#slime {
+.game-play #slime {
   position: absolute;
   bottom: 50px;
   left: 200px; }
 
-.gif-wrap {
+.game-play .game-wrap {
   position: relative;
   width: 300px;
   height: 500px; }
 
-.signup-form {
+.game-play .nametag {
+  position: absolute;
+  padding: .1em .3em .1em;
+  bottom: 28px;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  font-size: .8em; }
+
+.game-play .nametag.name-short {
+  left: 223px; }
+
+.game-play .nametag.name-medium {
+  left: 215px; }
+
+.game-play .nametag.name-long {
+  left: 210; }
+
+.game-control {
   width: 100%; }
-  .signup-form h2 {
+  .game-control h2 {
     padding: .5em;
     line-height: 1.25; }
-  .signup-form form {
+  .game-control form {
     padding: 1em; }
-  .signup-form input[type="text"] {
+  .game-control input[type="text"] {
     border-bottom-color: inherit; }
-  .signup-form select {
+  .game-control select {
     border: 1px solid #083358; }
-  .signup-form input[type="submit"] {
+  .game-control input[type="submit"] {
     display: flex;
     justify-content: center;
     padding: 10px 25px 10px;
@@ -58,6 +78,7 @@ h2 {
     color: white;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 50px; }
+    margin-top: 50px;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26); }
 
 /*# sourceMappingURL=style.css.map */
