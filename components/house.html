@@ -1,0 +1,20 @@
+<div id="house">
+  <h2>Welcome, owner of {{ pet.name }}!</h2>
+  <p>
+    This is your cozy little house. You can see {{ pet.name }}'s stats, feed {{pet.name}} and play with {{pet.name}} here.
+  </p>
+  <p>
+    Or you can go to the <button ng-click="start_scene('bank')">bank</button>.
+  </p>
+  <p>
+    Or you can <button ng-click="save_game()">save</button> your game.
+    {{ saved }}
+  </p>
+  <p>
+    {{ pet.name }}'s stats: <br>
+    {{ pet.name }} is starving. <br>
+    {{pet.name}} is illiterate. <br>
+    {{pet.name}} is atheist. <br>
+    {{pet.name}} wants you to pet it.
+  </p>
+</div>
