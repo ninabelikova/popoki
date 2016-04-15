@@ -1,0 +1,15 @@
+<div id="bank">
+  <h2>Central Bank of Kerning City</h2>
+  <p>
+    <b>Octopus</b> says in an annoyed tone: What? Don't take money away from my bank!
+  </p>
+  <img src="assets/octopus.png" alt="" />
+  <p>
+    <button ng-hide="pet.has_bank" ng-click="open_bank()">Open your account</button>
+  </p>
+  <p ng-show="pet.has_bank">
+    <b>Type of your bank account:</b> Maplestory basic account (daily interest: 0.01%) <br>
+    <b>Your mesos:</b> 0 :(
+  </p>
+  <button ng-click="start_scene('house')">Back</button>
+</div>

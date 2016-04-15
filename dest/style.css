@@ -1,3 +1,4 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700,400italic);
 body {
   font-family: "Open Sans", sans-serif;
   background-color: #001f3f;
@@ -11,7 +12,11 @@ select {
   border: none; }
 
 h2 {
-  font-size: 2.5em; }
+  font-size: 2.5em;
+  letter-spacing: -1px; }
+
+p {
+  line-height: 1.75; }
 
 #nav {
   margin-top: 4em; }
@@ -60,10 +65,7 @@ h2 {
 .game-control {
   width: 100%; }
   .game-control h2 {
-    padding: .5em;
     line-height: 1.25; }
-  .game-control form {
-    padding: 1em; }
   .game-control input[type="text"] {
     border-bottom-color: inherit; }
   .game-control select {
@@ -80,5 +82,7 @@ h2 {
     margin-right: auto;
     margin-top: 50px;
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26); }
+  .game-control .content {
+    padding: 1em; }
 
 /*# sourceMappingURL=style.css.map */

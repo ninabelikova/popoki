@@ -1,0 +1,27 @@
+<div class="signup-form">
+
+  <h2>Want to tame a wild slime? Sign up here!</h2>
+
+  <form ng-submit="add_pet(pet_to_play)">
+    <div class="row">
+
+      <div class="col s12">
+        Breed:
+        <select class="browser-default" ng-model="pet_to_play.breed">
+          <option value="slime">Slime</option>
+          <option value="orange-mushroom">Orange Mushroom</option>
+        </select>
+      </div>
+
+      <div class="input-field col s12">
+        <input id="name" type="text" class="validate" ng-model="pet_to_play.name">
+        <label for="name">Name</label>
+      </div>
+
+      <input type="submit" value="Adopt it">
+    </div>
+  </form>
+  <p>
+    Or <button ng-click="load_game()">load</button> your game.
+  </p>
+</div>

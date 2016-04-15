@@ -1,7 +1,16 @@
+// imports
+
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700,400italic);
+
+
+
+// variables
+
 $dark-blue: #001f3f;
 $navy-blue: #083358;
 $sea-green: #0da574;
 $yellow: #ffd717;
+
 
 body {
   font-family: "Open Sans", sans-serif;
@@ -20,6 +29,11 @@ select {
 
 h2 {
   font-size: 2.5em;
+  letter-spacing: -1px;
+}
+
+p {
+  line-height: 1.75;
 }
 
 #nav {
@@ -82,13 +96,9 @@ h2 {
   width: 100%;
 
   h2 {
-    padding: .5em;
     line-height: 1.25;
   }
 
-  form {
-    padding: 1em;
-  }
 
   input[type="text"] {
     border-bottom-color: inherit;
@@ -110,6 +120,10 @@ h2 {
     margin-right: auto;
     margin-top: 50px;
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+  }
+
+  .content {
+    padding: 1em;
   }
 
 }
