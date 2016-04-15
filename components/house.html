@@ -12,9 +12,23 @@
   </p>
   <p>
     {{ pet.name }}'s stats: <br>
-    {{ pet.name }} is starving. <br>
+    {{ pet.name }} is {{ hunger_statements[pet["current_hunger"]] }}. <button ng-click="open_feed()">Feed</button>
+    {{ feed_result }} <br>
     {{pet.name}} is illiterate. <br>
-    {{pet.name}} is atheist. <br>
-    {{pet.name}} wants you to pet it.
+    {{pet.name}} is {{ religions[pet.current_religion].name}}.
+    <form ng-submit="teach_religion(religion)">
+      <select ng-model="religion.value"  class="browser-default" style="padding: 0; height: auto; width: auto;">
+        <option value="">teach other religions</option>
+        <option ng-repeat="option in religions" value="{{option.id}}">
+          {{option.name}}
+        </option>
+        <input type="submit" value="yes!">
+      </select>
+    </form>
+    <br>
+
+    {{pet.name}} {{ petting_statements[pet["current_love"]] }}. <button ng-click="pet_pet()">Pet it</button>
+    {{ pet_result }}
   </p>
+
 </div>

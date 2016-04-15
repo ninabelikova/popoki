@@ -12,6 +12,8 @@ $sea-green: #0da574;
 $yellow: #ffd717;
 
 
+// general
+
 body {
   font-family: "Open Sans", sans-serif;
   background-color: $dark-blue;
@@ -22,9 +24,9 @@ body {
 
 
 select {
-   appearance: none;
-   background: transparent;
-   border: none;
+//   appearance: none;
+//   background: transparent;
+//   border: none;
 }
 
 h2 {
@@ -35,6 +37,16 @@ h2 {
 p {
   line-height: 1.75;
 }
+
+
+// general classes
+
+.modal-content {
+  color: $dark-blue;
+}
+
+
+// specific
 
 #nav {
   margin-top: 4em;
@@ -99,27 +111,38 @@ p {
     line-height: 1.25;
   }
 
-
-  input[type="text"] {
-    border-bottom-color: inherit;
+  #house {
+    select {
+      display: inline-block;
+    }
+    form {
+      display: inline-block;
+    }
   }
 
-  select {
-    border: 1px solid $navy-blue;
-  }
+  .signup-form {
+    input[type="submit"] {
+      display: flex;
+      justify-content: center;
+      padding: 10px 25px 10px;
+      font-size: 1.2em;
+      border: none;
+      background-color: $sea-green;
+      color: white;
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 50px;
+      box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+    }
 
-  input[type="submit"] {
-    display: flex;
-    justify-content: center;
-    padding: 10px 25px 10px;
-    font-size: 1.2em;
-    border: none;
-    background-color: $sea-green;
-    color: white;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 50px;
-    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+
+      input[type="text"] {
+        border-bottom-color: inherit;
+      }
+
+      select {
+        border: 1px solid $navy-blue;
+      }
   }
 
   .content {

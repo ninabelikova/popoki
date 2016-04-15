@@ -18,6 +18,9 @@ app.controller("MainControl", function ($scope) {
       chosen_pet.name_long = true;
     }
     $scope.pet = chosen_pet;
+    $scope.pet.current_hunger = 1;
+    $scope.pet.current_love = 1;
+    $scope.pet.current_religion = 3;
     $scope.started = true;
     $scope.start_scene('house');
   }
@@ -39,6 +42,7 @@ app.controller("MainControl", function ($scope) {
 
   $scope.start_scene = function (scene_name) {
     $scope.current_scene = $scope.scene_data[scene_name];
+    $scope.clear_messages();
   }
 
 
@@ -60,10 +64,67 @@ app.controller("MainControl", function ($scope) {
     }
   }
 
+  $scope.clear_messages = function () {
+    $scope.feed_result = "";
+    $scope.saved = "";
+    $scope.pet_result = "";
+  }
+
   // Gameplay
+
+  $scope.feed_result = "";
+  $scope.pet_result = "";
+
+  $scope.hunger_statements = {
+    1: "starving",
+    2: "extremely hungry",
+    3: "hungry",
+    4: "fine",
+    5: "full"
+  };
+
+  $scope.petting_statements = {
+    1: "wants you to pet it",
+    2: "wants you to pet it",
+    3: "wants you to pet it",
+    4: "loves you now :)"
+  }
+
+  $scope.religions = [
+    { id: 0, name: "eggnostic" },
+    { id: 1, name: "jewish"},
+    { id: 2, name: "demigod (Greek)" },
+    { id: 3, name: "atheist"}
+  ]
+
 
   $scope.open_bank = function () {
     $scope.pet['has_bank'] = true;
+  }
+
+  $scope.open_feed = function () {
+    $('#inventory').openModal();
+  }
+
+  $scope.feed = function (food) {
+    $('#inventory').closeModal();
+    $scope.feed_result = $scope.pet.name + " has devoured '" + food + "'!";
+    if ($scope.pet.current_hunger >= 5) {
+      $scope.pet.current_hunger = 5;
+    } else {
+      $scope.pet.current_hunger += 1;
+    }
+  }
+
+  $scope.pet_pet = function () {
+    if ($scope.pet.current_love < 4) {
+      $scope.pet.current_love += 1;
+    }
+    $scope.pet_result = "You pet " + $scope.pet.name + " !"
+  }
+
+  $scope.teach_religion = function (religion) {
+    $scope.pet.current_religion = religion.value;
   }
 
 });
@@ -100,5 +161,12 @@ app.directive('bank', function () {
   return {
     restrict: 'E',
     templateUrl: 'components/bank.html'
+  };
+});
+
+app.directive('inventory', function () {
+  return {
+    restrict: 'E',
+    templateUrl: 'components/inventory.html'
   };
 });
