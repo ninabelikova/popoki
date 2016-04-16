@@ -1,6 +1,6 @@
 <div class="signup-form">
 
-  <h2>Want to tame a wild slime? Sign up here!</h2>
+  <h2>Want to tame a wild Maplestory monster? Sign up here!</h2>
 
   <form ng-submit="add_pet(pet_to_play)">
     <div class="row">
@@ -8,8 +8,9 @@
       <div class="col s12">
         Breed:
         <select class="browser-default" ng-model="pet_to_play.breed">
-          <option value="slime">Slime</option>
+          <option value="slime" selected="selected">Slime</option>
           <option value="orange-mushroom">Orange Mushroom</option>
+          <option value="red-snail">Red Snail</option>
         </select>
       </div>
 

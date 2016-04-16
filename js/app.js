@@ -6,6 +6,7 @@ app.controller("MainControl", function ($scope) {
 
   $scope.pet = {};
   $scope.pet_to_play = {};
+  $scope.pet_to_play.breed = "slime";
   $scope.started = false;
 
   $scope.add_pet = function (chosen_pet) {
@@ -21,8 +22,14 @@ app.controller("MainControl", function ($scope) {
     $scope.pet.current_hunger = 1;
     $scope.pet.current_love = 1;
     $scope.pet.current_religion = 3;
+    $scope.pet_to_play = {};
     $scope.started = true;
     $scope.start_scene('house');
+
+  }
+
+  $scope.is_current_breed = function (breed) {
+    return $scope.pet_to_play.breed === breed || $scope.pet.breed === breed;
   }
 
 
@@ -43,16 +50,18 @@ app.controller("MainControl", function ($scope) {
   $scope.start_scene = function (scene_name) {
     $scope.current_scene = $scope.scene_data[scene_name];
     $scope.clear_messages();
+    $scope.pet.current_hunger -= 0.1;
+  //  if ($scope.trigger_random_event(5)) {
+  //    $scope.game_message = "You hit the jackpot!";
+  //  }
   }
 
 
   // Game Engine
 
-  $scope.saved = "";
-
   $scope.save_game = function () {
     localStorage.setItem('my_pet', JSON.stringify($scope.pet));
-    $scope.saved = "Saved!";
+    $scope.game_message = "Saved!";
   }
 
   $scope.load_game = function () {
@@ -61,19 +70,25 @@ app.controller("MainControl", function ($scope) {
       $scope.pet = saved_pet;
       $scope.started = true;
       $scope.start_scene('house');
+      $scope.pet_to_play = {};
     }
   }
 
   $scope.clear_messages = function () {
-    $scope.feed_result = "";
-    $scope.saved = "";
-    $scope.pet_result = "";
+    $scope.game_message = "";
+  }
+
+  $scope.random_number = function () {
+    var num = Math.floor((Math.random() * 30) + 1);
+    return num;
+  }
+
+  $scope.trigger_random_event = function (lucky_num) {
+    var num = $scope.random_number();
+    return num === lucky_num;
   }
 
   // Gameplay
-
-  $scope.feed_result = "";
-  $scope.pet_result = "";
 
   $scope.hunger_statements = {
     1: "starving",
@@ -100,6 +115,7 @@ app.controller("MainControl", function ($scope) {
 
   $scope.open_bank = function () {
     $scope.pet['has_bank'] = true;
+    $scope.game_message = "You opened an account at the Central Bank of Kerning City!";
   }
 
   $scope.open_feed = function () {
@@ -108,7 +124,7 @@ app.controller("MainControl", function ($scope) {
 
   $scope.feed = function (food) {
     $('#inventory').closeModal();
-    $scope.feed_result = $scope.pet.name + " has devoured '" + food + "'!";
+    $scope.game_message = $scope.pet.name + " has devoured '" + food + "'!";
     if ($scope.pet.current_hunger >= 5) {
       $scope.pet.current_hunger = 5;
     } else {
@@ -120,11 +136,16 @@ app.controller("MainControl", function ($scope) {
     if ($scope.pet.current_love < 4) {
       $scope.pet.current_love += 1;
     }
-    $scope.pet_result = "You pet " + $scope.pet.name + " !"
+    $scope.game_message = "You pet " + $scope.pet.name + " !"
   }
 
   $scope.teach_religion = function (religion) {
     $scope.pet.current_religion = religion.value;
+  }
+
+  $scope.show_hunger_statements = function () {
+    var rounded_hunger = Math.round($scope.pet.current_hunger);
+    return $scope.hunger_statements[rounded_hunger];
   }
 
 });

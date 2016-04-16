@@ -32,15 +32,29 @@ p {
   width: 100%;
   border-radius: 10px;
   max-height: 33em; }
+  .game-play #orange-mushroom {
+    left: 205px; }
+  .game-play #red-snail {
+    left: 212px; }
+  .game-play .game-message {
+    position: absolute;
+    top: 1px;
+    left: 0;
+    width: 100%;
+    min-height: 32px;
+    padding: 4px;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    font-size: 1em; }
 
-.game-play #slime {
+.game-play .monster-gif {
   position: absolute;
   bottom: 50px;
   left: 200px; }
 
 .game-play .game-wrap {
   position: relative;
-  width: 300px;
+  width: 500px;
   height: 500px; }
 
 .game-play .nametag {

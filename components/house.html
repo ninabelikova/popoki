@@ -12,8 +12,7 @@
   </p>
   <p>
     {{ pet.name }}'s stats: <br>
-    {{ pet.name }} is {{ hunger_statements[pet["current_hunger"]] }}. <button ng-click="open_feed()">Feed</button>
-    {{ feed_result }} <br>
+    {{ pet.name }} is {{ show_hunger_statements() }}. <button ng-click="open_feed()">Feed</button><br>
     {{pet.name}} is illiterate. <br>
     {{pet.name}} is {{ religions[pet.current_religion].name}}.
     <form ng-submit="teach_religion(religion)">
@@ -28,7 +27,6 @@
     <br>
 
     {{pet.name}} {{ petting_statements[pet["current_love"]] }}. <button ng-click="pet_pet()">Pet it</button>
-    {{ pet_result }}
   </p>
 
 </div>
