@@ -3,9 +3,10 @@
     <div class="game-message" ng-show="started">
       {{ game_message }}
     </div>
-    <img src="assets/slime-move.gif" class="monster-gif" ng-show="is_current_breed('slime')"/>
+    <img src="assets/slime-move.gif" class="monster-gif" ng-show="is_current_breed('slime')" />
     <img src="assets/orange-mushroom-move.gif" class="monster-gif" ng-show="is_current_breed('orange-mushroom')" id="orange-mushroom"/>
     <img src="assets/red-snail-move.gif" class="monster-gif" ng-show="is_current_breed('red-snail')"  id="red-snail"/>
+    <img src="assets/stump-move.gif" class="monster-gif" ng-show="is_current_breed('stump')" />
     <div class="nametag" ng-show="started" ng-class="{'name-short': pet.name_short, 'name-medium': pet.name_medium, 'name-long': pet.name_long}">
       {{ pet.name }}
     </div>

@@ -32,11 +32,30 @@
       <div id="inventory" class="modal">
           <div class="modal-content">
             <h4>Your Inventory</h4>
-            <p>It's empty :(</p>
-            <p>
-              But it's okay! Here's an egg on the house. Click on the egg to feed to {{pet.name}}.
-            </p>
-            <img src="assets/egg.png" alt="" ng-click="feed('egg')" />
+
+            <!-- If inventory is empty -->
+            <div class="empty-message" ng-show="pet.inventory.length===0">
+              <p>It's empty :(</p>
+              <p>
+                But it's okay! Here's an egg on the house. Click on the egg to feed to {{pet.name}}.
+              </p>
+              <img src="assets/egg.png" class="item-image" ng-click="feed('egg')" />
+            </div>
+
+            <!-- Ng repeat for all items in inventory -->
+            <img ng-repeat="item_name in pet.inventory track by $index" ng-src="assets/{{item_name}}.png" ng-click="select_item(item_name)" class="item-image">
+
+            <!-- Item details -->
+            <div class="item-information">
+              <fieldset>
+                <legend>Item information</legend>
+                <p><b>{{ current_item_name }}</b><br>
+                  {{ current_item_information }}
+                </p>
+              </fieldset>
+            </div>
+
+
           </div>
           <div class="modal-footer">
             <a href="#!" class="modal-action modal-close">close</a>

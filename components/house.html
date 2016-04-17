@@ -4,7 +4,7 @@
     This is your cozy little house. You can see {{ pet.name }}'s stats, feed {{pet.name}} and play with {{pet.name}} here.
   </p>
   <p>
-    Or you can go to the <button ng-click="start_scene('bank')">bank</button>.
+    Or you can go to the <button ng-click="start_scene('bank')">bank</button>, inspect your pretty <button ng-click="open_inventory()">inventory</button>.
   </p>
   <p>
     Or you can <button ng-click="save_game()">save</button> your game.
@@ -12,7 +12,7 @@
   </p>
   <p>
     {{ pet.name }}'s stats: <br>
-    {{ pet.name }} is {{ show_hunger_statements() }}. <button ng-click="open_feed()">Feed</button><br>
+    {{ pet.name }} is {{ show_hunger_statements() }}. <button ng-click="open_inventory()">Feed</button><br>
     {{pet.name}} is illiterate. <br>
     {{pet.name}} is {{ religions[pet.current_religion].name}}.
     <form ng-submit="teach_religion(religion)">

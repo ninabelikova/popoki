@@ -1,6 +1,6 @@
 var app = angular.module("app", []);
 
-app.controller("MainControl", function ($scope) {
+app.controller("MainControl", function ($scope, $compile) {
 
   // Setting up pet
 
@@ -19,9 +19,8 @@ app.controller("MainControl", function ($scope) {
       chosen_pet.name_long = true;
     }
     $scope.pet = chosen_pet;
-    $scope.pet.current_hunger = 1;
-    $scope.pet.current_love = 1;
-    $scope.pet.current_religion = 3;
+    $scope.initialize_pet();
+    $scope.initialize_game();
     $scope.pet_to_play = {};
     $scope.started = true;
     $scope.start_scene('house');
@@ -50,14 +49,15 @@ app.controller("MainControl", function ($scope) {
   $scope.start_scene = function (scene_name) {
     $scope.current_scene = $scope.scene_data[scene_name];
     $scope.clear_messages();
-    $scope.pet.current_hunger -= 0.1;
-  //  if ($scope.trigger_random_event(5)) {
-  //    $scope.game_message = "You hit the jackpot!";
-  //  }
+    $scope.minus_hunger(0.1);
+    if ($scope.trigger_random_event(5)) {
+      $scope.game_message = "Look! You found something!";
+      $scope.insert_random_item();
+    }
   }
 
 
-  // Game Engine
+  // ----------- Game Engine --------------
 
   $scope.save_game = function () {
     localStorage.setItem('my_pet', JSON.stringify($scope.pet));
@@ -70,6 +70,7 @@ app.controller("MainControl", function ($scope) {
       $scope.pet = saved_pet;
       $scope.started = true;
       $scope.start_scene('house');
+      $scope.initialize_game();
       $scope.pet_to_play = {};
     }
   }
@@ -78,17 +79,70 @@ app.controller("MainControl", function ($scope) {
     $scope.game_message = "";
   }
 
-  $scope.random_number = function () {
-    var num = Math.floor((Math.random() * 30) + 1);
-    return num;
+  $scope.random_number = function (min, max) {
+    return Math.floor(Math.random()*(max-min+1)+min);
   }
 
   $scope.trigger_random_event = function (lucky_num) {
-    var num = $scope.random_number();
+    var num = $scope.random_number(0, 30);
     return num === lucky_num;
   }
 
-  // Gameplay
+  $scope.random_item_position = function () {
+    var position = $scope.random_number(10, 400);
+    return position;
+  }
+
+  $scope.random_item_index = function () {
+    var index = $scope.random_number(0, $scope.items.length-1);
+    return index;
+  }
+
+  $scope.generate_random_item = function () {
+    var part_one = "<img src=\"assets/";
+    var item_name = $scope.items[$scope.random_item_index()].name;
+    var part_two = ".png\" class='game-item' style=\"left:";
+    var position = $scope.random_item_position();
+    var part_three = "px;\" ng-click=\"collect_item($event,'";
+    var part_four = "')\" \>";
+    return part_one + item_name + part_two + position + part_three + item_name + part_four;
+  }
+
+  $scope.insert_random_item = function () {
+    var syntax = $scope.generate_random_item();
+    $(".game-wrap").append($compile(syntax)($scope));
+  }
+
+  $scope.minus_hunger = function (minus) {
+    if ($scope.pet.current_hunger > (0.5+minus)) {
+      $scope.pet.current_hunger -= minus;
+    }
+  }
+
+  $scope.initialize_pet = function () {
+    $scope.pet.current_hunger = 1;
+    $scope.pet.current_love = 1;
+    $scope.pet.current_religion = 3;
+    $scope.pet.inventory = [];
+  }
+
+  $scope.initialize_game = function () {
+    $scope.create_lookup($scope.items, 'name', 'value', $scope.item_value_lookup);
+    $scope.create_lookup($scope.items, 'name', 'detail', $scope.item_detail_lookup);
+  }
+
+  $scope.create_lookup = function (array, value1, value2, new_array) {
+    for (var i = 0, len = array.length; i < len; i++) {
+      new_array[array[i][value1]] = array[i][value2];
+    }
+  }
+
+
+
+
+  // ------------- Gameplay ----------------
+
+  // game data
 
   $scope.hunger_statements = {
     1: "starving",
@@ -103,22 +157,37 @@ app.controller("MainControl", function ($scope) {
     2: "wants you to pet it",
     3: "wants you to pet it",
     4: "loves you now :)"
-  }
+  };
 
   $scope.religions = [
     { id: 0, name: "eggnostic" },
     { id: 1, name: "jewish"},
     { id: 2, name: "demigod (Greek)" },
     { id: 3, name: "atheist"}
-  ]
+  ];
 
+  $scope.items = [
+    { id: 0, category: 1, name: "egg", value: 10, detail: "An ordinary egg. Very delicious."},
+    { id: 1, category: 1, name: "pet-milk", value: 30, detail: "Best for your pet's health! Who doesn't like milk? Unless your pet is lactose intolerant of course."}
+  ];
+
+  $scope.item_value_lookup = {};
+  $scope.item_detail_lookup = {};
+
+
+
+
+  // game functions that are directly executed from display
+
+  $scope.current_item_information = "";
+  $scope.current_item_name = "";
 
   $scope.open_bank = function () {
     $scope.pet['has_bank'] = true;
     $scope.game_message = "You opened an account at the Central Bank of Kerning City!";
   }
 
-  $scope.open_feed = function () {
+  $scope.open_inventory = function () {
     $('#inventory').openModal();
   }
 
@@ -136,7 +205,7 @@ app.controller("MainControl", function ($scope) {
     if ($scope.pet.current_love < 4) {
       $scope.pet.current_love += 1;
     }
-    $scope.game_message = "You pet " + $scope.pet.name + " !"
+    $scope.game_message = "You pet " + $scope.pet.name + " !";
   }
 
   $scope.teach_religion = function (religion) {
@@ -147,6 +216,19 @@ app.controller("MainControl", function ($scope) {
     var rounded_hunger = Math.round($scope.pet.current_hunger);
     return $scope.hunger_statements[rounded_hunger];
   }
+
+  $scope.collect_item = function ($event, item_name) {
+    $event.currentTarget.remove();
+    $scope.pet.inventory.push(item_name);
+  }
+
+  $scope.select_item = function (item_name) {
+    $scope.current_item_information = $scope.item_detail_lookup[item_name];
+    $scope.current_item_name = item_name;
+  }
+
+
+
 
 });
 
